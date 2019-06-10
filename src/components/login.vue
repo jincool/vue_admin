@@ -46,7 +46,10 @@
             //登录处理
             handleLogin() {
                 this.loading = true;
-                this.$api.login(this.user.username, this.user.password).then((res) => {
+                let params={
+                    'username':this.user.username, 'password':this.user.password
+                };
+                this.$api.post('?a=menu',params).then((res) => {
                     let {status, navData, user, routerData} = res.data;
                     if (status === 1) {
                         // 将路由信息，菜单信息，用户信息存到sessionStorage里
