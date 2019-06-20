@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-aside width="200px">
+        <el-aside width="201px">
             <el-menu
                     background-color="#545c64"
                     text-color="#fff"
