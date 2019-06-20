@@ -2,7 +2,7 @@
     <transition name="el-zoom-in-center">
         <div class="login-container">
             <el-row type="flex" justify="space-around">
-                <el-col :xs="12" :sm="10" :md="8">
+                <el-col :xs="12" :sm="10" :md="6">
                     <form_frame>
                         <template slot="title">
                             登录
