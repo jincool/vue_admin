@@ -2,7 +2,7 @@
     <div>
         <el-row>
             <el-col :span="20">
-                <span class="title">党 费 收 缴 管 理 系 统</span>
+                <span class="title">后 台 管 理 系 统</span>
             </el-col>
             <el-col :span="4">
                 <span><i class="el-icon-s-custom"></i>{{user}}</span>
