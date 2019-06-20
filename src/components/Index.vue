@@ -34,5 +34,7 @@
 </script>
 
 <style scoped>
-
+.el-container{
+    min-width: 800px;
+}
 </style>
