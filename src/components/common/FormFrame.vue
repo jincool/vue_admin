@@ -13,7 +13,9 @@
         <el-row>
             <transition name="el-zoom-in-top">
                 <el-card v-show='show' shadow="hover">
-                    <slot name="main"></slot>
+                    <div class="div_height_auto">
+                        <slot name="main"></slot>
+                    </div>
                 </el-card>
             </transition>
         </el-row>
@@ -37,9 +39,12 @@
 <style scoped>
     .cool_form {
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-        border-radius: 4px
+        border-radius: 4px;
     }
-
+    .div_height_auto{
+        max-height:580px;
+        overflow: auto;
+    }
     .cool_form_title {
         /*background-color: #409EFF;*/
         background: linear-gradient(to right, #de7cf5, #c850f5);
