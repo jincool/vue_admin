@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/style.css';
+// import 'element-ui/lib/theme-chalk/style.css';
+import '@/assets/css/style.css';
 import '@/assets/css/common.css';
 import App from './App.vue'
 import router from './router'
@@ -23,6 +24,7 @@ if (sessionStorage.getItem('user')) {
 Vue.component('card_cool', CardCool);
 Vue.component('form_frame', FormFrame);
 Vue.prototype.$echarts = echarts;
+console.log(process.env.NODE_ENV)
 new Vue({
   router,
   store,
