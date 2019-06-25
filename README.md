@@ -1,4 +1,4 @@
-# bigscreen
+# admin
 
 ## Project setup
 ```
