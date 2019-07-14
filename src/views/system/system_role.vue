@@ -4,35 +4,29 @@
             <el-col :xs="24" :sm="12" :md="10">
                 <form_frame>
                     <template slot="title">
-                        主菜单设置
+                        角色设置
                     </template>
                     <template slot="main">
                         <div>
-                            <el-tooltip class="item" effect="light" content="鼠标拖动菜单排序" placement="top">
-                            <el-button size="small" type="primary"  class="btn" @click="refreshSort(1)" plain>保存排序</el-button>
-                            </el-tooltip>
-                        </div>
-                        <br>
-                        <div>
-                            <el-button size="small" class="btn" @click="addMenu" plain>新增主菜单</el-button>
+                            <el-button size="small" class="btn" @click="addRole" plain>新增角色</el-button>
                         </div>
                         <div class="cool-list">
                             <div class="el-row"
-                                 v-for="item in menu" v-dragging="{ item: item, list: menu,group: 'menu' }"
+                                 v-for="item in role"
                                  :key="item.id"
                             >
                                 <el-dropdown-item divided >
                                     <el-col :span="12">
-                                        {{item.menu_name}}
+                                        {{item.role_name}}
                                     </el-col>
                                     <el-col :span="12">
                                         <el-button
                                                 size="mini"
-                                                @click="editMenu(1,item.id,item.menu_name)">编辑
+                                                @click="editRole(item.id,item.role_name)">编辑
                                         </el-button>
                                         <el-button
                                                 size="mini" type="danger"
-                                                @click="deleteMenu(1,item.id)">删除
+                                                @click="deleteRole(1,item.id)">删除
                                         </el-button>
                                     </el-col>
                                 </el-dropdown-item>
@@ -40,26 +34,15 @@
                         </div>
                     </template>
                 </form_frame>
-                <!--<br>-->
-                <!--<el-pagination-->
-                <!--background-->
-                <!--layout="prev, pager, next"-->
-                <!--:total="55">-->
-                <!--</el-pagination>-->
+
             </el-col>
             <el-col :xs="24" :sm="12" :md="10">
 
                 <form_frame>
                     <template slot="title">
-                        子菜单设置
+                        角色菜单设置
                     </template>
                     <template slot="main">
-                        <div>
-                            <el-tooltip class="item" effect="light" content="鼠标拖动菜单排序" placement="top">
-                                <el-button size="small" type="primary"  class="btn" @click="refreshSort(2)" plain>保存排序</el-button>
-                            </el-tooltip>
-                        </div>
-                        <br>
                         <div>
                             <el-row>
                                 <el-col :span="12">
@@ -67,36 +50,48 @@
                                         <el-select v-model="value"  @change="handleChange" size="small"
                                                    placeholder="请选择" ref="selection">
                                             <el-option
-                                                    v-for="item in menu"
+                                                    v-for="item in role"
                                                     :key="item.id"
-                                                    :label="item.menu_name"
+                                                    :label="item.role_name"
                                                     :value="item.id">
                                             </el-option>
                                         </el-select>
                                     </div>
                                 </el-col>
                                 <el-col :span="12">
-                                    <el-button size="small" class="btn" @click="dialogVisible = true" plain>新增子菜单</el-button>
+                                    <el-button size="small" class="btn" @click="addRoleMenu" plain>新增角色菜单</el-button>
                                 </el-col>
                             </el-row>
                         </div>
                         <div class="cool-list">
+                            <div class="el-row">
+                                <el-dropdown-item divided >
+                                    <el-col :span="8">
+                                       <el-tag>主菜单</el-tag>
+                                    </el-col>
+                                    <el-col :span="8">
+                                          <el-tag>子菜单</el-tag>
+                                    </el-col>
+                                    <el-col :span="8">
+                                         <el-tag>操作</el-tag>
+                                    </el-col>
+                                </el-dropdown-item>
+                            </div>
                             <div class="el-row"
-                                 v-for="sub in subMenu" v-dragging="{ item: sub, list: subMenu,group: 'subMenu'}"
+                                 v-for="sub in menu"
                                  :key="sub.id"
                             >
                                 <el-dropdown-item divided >
-                                    <el-col :span="12">
+                                    <el-col :span="8">
+                                        {{sub.menu_name}}
+                                    </el-col>
+                                    <el-col :span="8">
                                         {{sub.sub_name}}
                                     </el-col>
-                                    <el-col :span="12">
-                                        <el-button
-                                                size="mini"
-                                                @click="editSubMenu(2,sub.id,sub.sub_name)">编辑
-                                        </el-button>
+                                    <el-col :span="8">
                                         <el-button
                                                 size="mini" type="danger"
-                                                @click="deleteSubMenu(2,sub.id)">删除
+                                                @click="deleteRoleMenu(2,sub.id)">删除
                                         </el-button>
                                     </el-col>
                                 </el-dropdown-item>
@@ -106,7 +101,6 @@
 
                     </template>
                 </form_frame>
-
 
             </el-col>
         </el-row>
@@ -115,19 +109,39 @@
                 width="30%"
                 :before-close="handleClose">
             <span slot="title">
-                <el-tag>{{selectedLabel}}</el-tag><el-tag type="danger">添加子菜单</el-tag>
+                <el-tag>{{selectedLabel}}</el-tag>
             </span>
-            <div>
-                <el-input v-model="subName" placeholder="请输入名字"></el-input>
-            </div>
-                <br>
-            <div>
-                <el-input v-model="component" placeholder="请输入地址" ></el-input>
-            </div>
 
+            <div>
+                <el-row>
+                    <el-col :span="12">
+                        <el-select v-model="mainValue"  @change="getSubMenu(mainValue)" size="small"
+                                   placeholder="请选择">
+                            <el-option
+                                    v-for="item in mainMenu"
+                                    :key="item.id"
+                                    :label="item.menu_name"
+                                    :value="item.id">
+                            </el-option>
+                        </el-select>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-select v-model="subValue"  size="small"
+                                   placeholder="请选择">
+                            <el-option
+                                    v-for="item in subMenu"
+                                    :key="item.id"
+                                    :label="item.sub_name"
+                                    :value="item.id">
+                            </el-option>
+                        </el-select>
+                    </el-col>
+                </el-row>
+
+            </div>
             <span slot="footer" class="dialog-footer">
     <el-button size="mini" @click="dialogVisible = false">取 消</el-button>
-    <el-button size="mini" type="primary" @click="addSubMenu">确 定</el-button>
+    <el-button size="mini" type="primary" @click="saveRoleMenu">确 定</el-button>
   </span>
         </el-dialog>
 
@@ -142,22 +156,34 @@
         name: "system_menu",
         data() {
             return {
+                role: [],//角色列表
                 menu: [],//菜单列表
-                subMenu: [],//子菜单列表
-                value: '',//select默认选择值
+                value: '',//select角色选择值
                 selectedLabel:'',//select的标签名
-                subName:'',//子菜单名字
-                component:'',//子菜单组件地址
-                dialogVisible: false ,//模态框默认关闭
+                mainMenu:[],//获取主菜单列表
+                mainValue:'',//select主菜单选择值
+                subMenu:[],//获取子菜单列表
+                subValue:'',//select子菜单选择值
+                subName:'',//子角色名字
+                component:'',//子角色组件地址
+                dialogVisible: false ,//新增角色菜单模态框默认关闭
+                isOpenDialogVisible:0 //是否已经打开角色菜单模态框
             }
         },
         methods: {
-            //获取主菜单
-            getMenu() {
+            //角色选择切换，加载角色对应菜单
+            handleChange() {
+                this.$nextTick(()=> {
+                    this.selectedLabel = this.$refs.selection.selectedLabel;//获取select标签值
+                });
+                this.getMenu(this.value)
+            },
+            //获取角色
+            getRole() {
                 return new Promise((resolve, reject) => {
-                    this.$api.get('?f=system&c=Menu&a=getMenu').then(res => {
+                    this.$api.get('?f=system&c=Role&a=getRole').then(res => {
                         if (res.status === 200) {
-                            this.menu = res.data;
+                            this.role = res.data;
                             this.value = res.data[0].id;
                             resolve(this.value);
                         }
@@ -165,88 +191,113 @@
                     })
                 })
             },
+            //获取菜单
+            getMenu(id){
+                this.$api.post('?f=system&c=Role&a=getMenu',{'id':id}).then(res => {
+                    if (res.status === 200) {
+                        this.menu = res.data;
+                    }
+                })
+            },
+            //获取主菜单
+            getMainMenu() {
+                return new Promise((resolve, reject) => {
+                    this.$api.get('?f=system&c=Menu&a=getMenu').then(res => {
+                        if (res.status === 200) {
+                            this.mainMenu = res.data;
+                            this.mainValue = res.data[0].id;
+                            resolve(this.mainValue);
+                        }
+                    })
+                })
+            },
             //获取子菜单
             getSubMenu(id){
+                this.subValue = '';
                 this.$api.post('?f=system&c=Menu&a=getSubMenu',{'id':id}).then(res => {
                     if (res.status === 200) {
                         this.subMenu = res.data;
+                        this.subValue = res.data[0].id;
                     }
                 })
             },
-            //编辑主菜单 type:1=>一级主菜单，2=>二级子菜单
-            editMenu(type, id,inputValue){
-                this.mesEditBox('请修改菜单名', '?c=Menu&a=editMenu', {'id':id,'type':type},inputValue).then(status=>{
-                    if (status===1) {
-                        this.getMenu()
-                    }
-                });
+            //新增角色菜单
+            addRoleMenu(){
+             this.dialogVisible = true;
+             // 获取主菜单
+                if (this.isOpenDialogVisible === 0) {
+                    this.getMainMenu().then(id=>{
+                        // 获取子菜单
+                        this.getSubMenu(id);
+                        //标记已经打开过此模态框，无需发起请求数据
+                        this.isOpenDialogVisible = 1;
+                    });
+                }
             },
-            //删除主菜单 type:1=>一级主菜单，2=>二级子菜单
-            deleteMenu(type, id){
-                this.deleteBox('?f=system&c=Menu&a=deleteMenu',{'id':id,'type':type}).then(status=>{
-                    if (status===1) {
-                        this.getMenu()
-                    }
-                });
-            },
-            //编辑子菜单 type:1=>一级主菜单，2=>二级子菜单
-            editSubMenu(type, id,inputValue){
-                this.mesEditBox('请修改菜单名', '?f=system&c=Menu&a=editMenu', {'id':id,'type':type},inputValue).then(status=>{
-                    if (status===1) {
-                        this.getSubMenu(this.value)
-                    }
-                });
-            },
-            //删除子菜单 type:1=>一级主菜单，2=>二级子菜单
-            deleteSubMenu(type, id){
-                this.deleteBox('?f=system&c=Menu&a=deleteMenu',{'id':id,'type':type}).then(status=>{
-                    if (status===1) {
-                        this.getSubMenu(this.value)
-                    }
-                });
-            },
-            // 切换select，刷新子菜单
-            handleChange() {
-                this.$nextTick(()=> {
-                    this.selectedLabel = this.$refs.selection.selectedLabel;//获取select标签值
-                });
-                console.log(this.value);
-                this.getSubMenu(this.value)
-            },
-            // 增加主菜单
-            addMenu() {
-                this.mesEditBox('请添加主菜单', '?f=system&c=Menu&a=addMenu', {}).then(status=>{
-                    if (status===1) {
-                        this.getMenu()
-                    }
-                });
-            },
-            //添加子菜单
-            addSubMenu(){
-                this.dialogVisible = false;//关闭模态框
-                let params ={'menuId':this.value,'subName':this.subName,'component':this.component}
-                this.$api.post('?f=system&c=Menu&a=addSubMenu', params).then(res => {
-                    if (res.data.status === 1) {
-                        this.$message({
-                            type: 'info',
-                            message: '操作成功'
-                        });
-                        this.getSubMenu(this.value)
-                    }else {
-                        this.$message({
-                            type: 'info',
-                            message: '操作失败'
-                        })
-                    }
-
+            // 保存新增的角色菜单
+            saveRoleMenu(){
+                return new Promise(resolve =>{
+                    let params = {'data':{'role_id':this.value ,'menu_id':this.mainValue ,'sub_id':this.subValue}};
+                    this.$api.post('?f=system&c=Role&a=addRoleMenu',params).then(res => {
+                        if (res.data.status === 1) {
+                            this.$message({
+                                type: 'info',
+                                message: '操作成功'
+                            });
+                            // 重新刷新加载菜单
+                            this.getMenu(this.value);
+                            // 关闭模态框
+                            this. dialogVisible = false;
+                        }else {
+                            this.$message({
+                                type: 'info',
+                                message: '操作失败'
+                            })
+                        }
+                        resolve(res.data.status);
+                    })
                 })
 
+
             },
-            //刷新保存排序，type:1=>一级主菜单，2=>二级子菜单
+            //编辑角色
+            editRole(id,inputValue){
+                this.mesEditBox('请修改角色名', '?f=system&c=Role&a=editRole', {'id':id},inputValue).then(status=>{
+                    if (status===1) {
+                        this.getRole()
+                    }
+                });
+            },
+            //删除角色 type:1=>系统角色，2=>权限角色菜单
+            deleteRole(type, id){
+                this.deleteBox('?f=system&c=Role&a=deleteRole',{'id':id,'type':type}).then(status=>{
+                    if (status===1) {
+                        this.getRole()
+                    }
+                });
+            },
+            //删除权限角色菜单 type:1=>系统角色，2=>权限角色菜单
+            deleteRoleMenu(type, id){
+                this.deleteBox('?f=system&c=Role&a=deleteRole',{'id':id,'type':type}).then(status=>{
+                    if (status===1) {
+                        // 重新刷新加载菜单
+                        this.getMenu(this.value);
+                    }
+                });
+            },
+            // 增加角色
+            addRole() {
+                this.mesEditBox('请添加角色', '?f=system&c=Role&a=addRole', {}).then(status=>{
+                    if (status===1) {
+                        this.getRole()
+                    }
+                });
+            },
+            //刷新保存排序，type:1=>系统角色，2=>权限角色
             refreshSort(type){
-                let dataMenu = {'1':this.menu,'2':this.subMenu}[type];
-                let params = {'type':type,'dataMenu':dataMenu};
-                this.$api.post('?f=system&c=Menu&a=refreshSort', params).then(res => {
+                let dataRole = {'1':this.menu,'2':this.subRole}[type];
+                let params = {'type':type,'dataRole':dataRole};
+                this.$api.post('?f=system&c=Role&a=refreshSort', params).then(res => {
                     if (res.data.status === 1) {
                         this.$message({
                             type: 'info',
@@ -344,11 +395,11 @@
 
         },
         created() {
-             this.getMenu().then((id)=>{
+             this.getRole().then((id)=>{
                  //获取select标签值
                  this.selectedLabel = this.$refs.selection.selectedLabel;
-                 //获取子菜单值
-                 this.getSubMenu(id)
+                 //获取子角色值
+                 this.getMenu(id)
              });
         },
         mounted () {

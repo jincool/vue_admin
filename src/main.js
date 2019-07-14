@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui';
-// import 'element-ui/lib/theme-chalk/style.css';
+// import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/css/style.css';
 import '@/assets/css/common.css';
 import App from './App.vue'
@@ -13,7 +13,7 @@ import api from './api/api'
 import CardCool from '@/components/echarts/common/CardCool'
 import FormFrame from '@/components/common/FormFrame'
 Vue.config.productionTip = false;
-Vue.prototype.$api = api;
+Vue.prototype.$api = api;//axios绑定原型
 Vue.use(ElementUI);
 Vue.use(VueDND)//拖拽排序
 // 用户手动刷新页面，这是路由会被重设，要重新新增
