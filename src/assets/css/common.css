@@ -1,16 +1,24 @@
 
 /*滚轮条自定义*/
 ::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 5px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 1px;
+    width: 3px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 5px;
 }
 ::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: linear-gradient(to right, #de7cf5, #b330f5, #de7cf5);
+    background: linear-gradient(to right, #de7cf5, #b330f5, #45367a);
 }
 ::-webkit-scrollbar-track {/*滚动条里面轨道*/
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
     border-radius: 10px;
     background: #EDEDED;
+}
+.el-card__header{
+    text-align: center;
+}
+/*div高度自适应*/
+.height_auto{
+    max-height:560px;
+    overflow: auto;
 }

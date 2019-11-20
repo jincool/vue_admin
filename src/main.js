@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
-import '@/assets/css/style.css';
+import '@/assets/css/theme/index.css';
 import '@/assets/css/common.css';
 import App from './App.vue'
 import router from './router'
@@ -18,7 +18,7 @@ Vue.use(ElementUI);
 Vue.use(VueDND)//拖拽排序
 // 用户手动刷新页面，这是路由会被重设，要重新新增
 if (sessionStorage.getItem('user')) {
-    let routes = JSON.parse(sessionStorage.getItem('routes'))
+    let routes = JSON.parse(sessionStorage.getItem('routes'));
     store.dispatch("add_Routes", routes)
 }
 Vue.component('card_cool', CardCool);
@@ -26,7 +26,7 @@ Vue.component('form_frame', FormFrame);
 Vue.prototype.$echarts = echarts;
 console.log(process.env.NODE_ENV)
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

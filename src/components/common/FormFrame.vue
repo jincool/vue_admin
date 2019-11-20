@@ -47,12 +47,12 @@
     }
     .cool_form_title {
         /*background-color: #409EFF;*/
-        background: linear-gradient(to right, #de7cf5, #c850f5);
+        background: linear-gradient(to right, #5b535e, #5b535e);
         color: #fff;
         font-size: 22px;
         text-align: center;
         height: 45px;
-        border-radius: 5px;
+        border-radius: 1px;
     }
     .cool_form_title>div {
         margin-top: 10px;

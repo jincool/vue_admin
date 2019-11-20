@@ -1,16 +1,19 @@
 <template>
     <div>
-        <el-aside width="201px">
+        <el-aside :width="asideWidth">
             <el-menu
                     background-color="#545c64"
                     text-color="#fff"
-                    default-active="index_info"
+                    active-text-color="#ffd04b"
                     router
-                    active-text-color="#ffd04b">
+                    unique-opened
+                    :collapse="isCollapse"
+                    class="el-menu-vertical"
+                   >
                 <el-submenu v-for="(child, index) in currentNavItems" :index="child.id" :key="index">
-                    <template slot="title"><i class="el-icon-menu"></i>{{child.menu_title}}</template>
+                    <template slot="title"><i class="el-icon-menu"></i><span slot="title">{{child.menu_title}}</span></template>
                     <el-menu-item-group>
-                        <el-menu-item  v-for="item in child.subs" :index="item.url">{{item.sub_title}}</el-menu-item>
+                        <el-menu-item  v-for="(item,index) in child.subs" :key="index" :index="item.url">{{item.sub_title}}</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
             </el-menu>
@@ -24,6 +27,7 @@
         data(){
             return{
                 currentNavItems: [],
+                 asideWidth:'',
             }
         },
         methods:{
@@ -31,10 +35,18 @@
         created () {
             // 从sessionStorage得到menuData
             this.currentNavItems = JSON.parse(sessionStorage.getItem('menuData'));
+        },
+        computed:{
+            isCollapse:function () {
+                return  this.$store.state.collapse.collapse;//侧边栏收卷状态
+            }
         }
     }
 </script>
 
-<style scoped>
-
+<style>
+    .el-menu-vertical:not(.el-menu--collapse) {
+        width: 200px;
+        min-height: 400px;
+    }
 </style>

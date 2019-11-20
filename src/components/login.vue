@@ -54,7 +54,7 @@
                     if (status === 1) {
                         // 将路由信息，菜单信息，用户信息存到sessionStorage里
                         sessionStorage.setItem('menuData', JSON.stringify(this.getMenu(navData)));
-                        sessionStorage.setItem('user', user.name);
+                        sessionStorage.setItem('user', JSON.stringify(user));
                         sessionStorage.setItem('routes', JSON.stringify(routerData));
                         this.add_Routes(routerData) //触发vuex里的增加路由
                     } else if (status === 0) {
@@ -123,6 +123,6 @@
     }
     .button{
         width: 100%;
-       background: linear-gradient(to right, #de7cf5, #c850f5); ;
+       /*background: linear-gradient(to right, #de7cf5, #c850f5); ;*/
     }
 </style>

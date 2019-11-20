@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Qs from 'qs'
+// import {Loading } from 'element-ui'
 let Axios= axios.create({
     // baseURL:'/api/',
     baseURL: process.env.NODE_ENV === "development"?'api':'./',
@@ -11,13 +12,24 @@ let Axios= axios.create({
         'Content-Type':'application/x-www-form-urlencoded'
     }
 });
-// const api = {
-//   login (username, password) {
-//     let params={
-//       'username':username, 'password':password
-//     }
-//     return Axios.post('?a=menu',params)
-//   }
-// };
+// 请求拦截器
+Axios.interceptors.request.use((config) => {
+   //  Loading.service({
+   //     lock: true,
+   // });
+    return config
+}, (error) => {
+    return Promise.reject(error)
+})
+
+// 响应拦截器
+Axios.interceptors.response.use((response) => {
+    // Loading.service({
+    //     lock: true,
+    // }).close()
+    return response
+}, (error) => {
+    return Promise.reject(error)
+})
 
 export default Axios
