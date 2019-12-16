@@ -13,6 +13,8 @@ const router = new Router({
     ]
 });
 router.beforeEach((to, from, next) => {
+    console.log(to)
+
     // document.body.style.background="linear-gradient(to right, #e9eaef, #e9eaef)";
     // 判断是否为外部链接，如果是则重定向outside_iframe组件
     if (to.path.indexOf('http') !== -1) {
@@ -21,6 +23,7 @@ router.beforeEach((to, from, next) => {
             path: '/outside-iframe',
             query: {redirect: to.fullPath}
         });
+        console.log(next())
         next();
     }
     // 判断是否登录

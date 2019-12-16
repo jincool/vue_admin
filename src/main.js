@@ -10,7 +10,6 @@ import VueDND from 'awe-dnd'
 import store from './store/store'
 import echarts from 'echarts'
 import api from './api/api'
-import CardCool from '@/components/echarts/common/CardCool'
 import FormFrame from '@/components/common/FormFrame'
 Vue.config.productionTip = false;
 Vue.prototype.$api = api;//axios绑定原型
@@ -21,7 +20,6 @@ if (sessionStorage.getItem('user')) {
     let routes = JSON.parse(sessionStorage.getItem('routes'));
     store.dispatch("add_Routes", routes)
 }
-Vue.component('card_cool', CardCool);
 Vue.component('form_frame', FormFrame);
 Vue.prototype.$echarts = echarts;
 console.log(process.env.NODE_ENV)

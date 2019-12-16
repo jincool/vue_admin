@@ -8,7 +8,7 @@ import Axios from '@/api/api'
  * @API 返回status状态，1为成功
  * @returns {Promise<any>}
  */
-export function deleteBox( url, pramas) {
+export function deleteBox( url, pramas){
     return new Promise((resolve, reject) => {
         MessageBox.confirm('此操作将删除该选项, 是否继续?', '提示', {
             confirmButtonText: '确定',

@@ -51,6 +51,7 @@
                 };
                 this.$api.post('?a=menu',params).then((res) => {
                     let {status, navData, user, routerData} = res.data;
+                    console.log(res)
                     if (status === 1) {
                         // 将路由信息，菜单信息，用户信息存到sessionStorage里
                         sessionStorage.setItem('menuData', JSON.stringify(this.getMenu(navData)));

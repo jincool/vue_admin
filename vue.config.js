@@ -22,7 +22,7 @@ module.exports = {
         // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
         proxy: {
             "/api": {
-                target: "http://jincool.vue",
+                target: "http://localhost/admin",
                 ws: true,
                 changeOrigin: true,
                 pathRewrite: {

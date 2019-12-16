@@ -6,6 +6,7 @@
                     text-color="#fff"
                     active-text-color="#ffd04b"
                     router
+                    :default-active="$route.name"
                     unique-opened
                     :collapse="isCollapse"
                     class="el-menu-vertical"
@@ -28,6 +29,7 @@
             return{
                 currentNavItems: [],
                  asideWidth:'',
+                activeIndex:'department-add'
             }
         },
         methods:{
@@ -35,11 +37,13 @@
         created () {
             // 从sessionStorage得到menuData
             this.currentNavItems = JSON.parse(sessionStorage.getItem('menuData'));
+
         },
         computed:{
             isCollapse:function () {
                 return  this.$store.state.collapse.collapse;//侧边栏收卷状态
             }
+
         }
     }
 </script>

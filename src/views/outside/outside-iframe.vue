@@ -17,7 +17,8 @@
             let path = this.$route.query.redirect;
             if (path.substr(0,1)=='/')
                 this.url = path.substr(1)
-            // console.log(path.substr(1));
+            // window.open(path.substr(1)) //弹出页面
+
         }
     }
 </script>

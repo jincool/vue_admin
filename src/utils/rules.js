@@ -1,3 +1,4 @@
+import api from './../api/api'
 // 检查ip
 export function validateIP(rule, value,callback) {
     if(value==''||value==undefined||value==null){
@@ -83,7 +84,7 @@ export function isInteger(rule, value, callback) {
     }, 0);
 }
 // 两位小数验证
-const validateValidity = (rule, value, callback) => {
+export const validateValidity = (rule, value, callback) => {
     if (!/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/.test(value)) {
         callback(new Error('最多两位小数！！！'));
     } else {
@@ -100,7 +101,7 @@ export const validatePsdReg = (rule, value, callback) => {
     } else {
         callback()
     }
-}
+};
 // 中文校验
 export const validateContacts = (rule, value, callback) => {
     if (!value) {
@@ -111,7 +112,7 @@ export const validateContacts = (rule, value, callback) => {
     } else {
         callback()
     }
-}
+};
 // 账号校验
 export const validateCode = (rule, value, callback) => {
     if (!value) {
@@ -122,7 +123,7 @@ export const validateCode = (rule, value, callback) => {
     } else {
         callback()
     }
-}
+};
 // 纯数字校验
 export const validateNumber = (rule, value, callback) => {
     let numberReg = /^\d+$|^\d+[.]?\d+$/
@@ -135,4 +136,21 @@ export const validateNumber = (rule, value, callback) => {
     } else {
         callback(new Error('请输入值'))
     }
+};
+//检查账号是否存在
+export async function validateHasUsername(rule, value, callback){
+    let params ={'username':value}
+    await api.post('?f=department&c=deptUser&a=hasUsername',params).then(res => {
+        let {status} = res.data;
+        switch (status){
+            case 0:
+                return callback(new Error('账号已存在'));
+            case 1:
+                callback();
+                break;
+            default:
+                return callback(new Error('检查账号，重新输入'));
+        }
+
+    });
 }
