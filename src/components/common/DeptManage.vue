@@ -194,7 +194,12 @@ export default {
                     let url = this.type ===2? '?f=department&c=department&a=addDepartment'
                         :'?f=department&c=department&a=editDepartment';
                     let node = this.type ===2 ? this.node : this.node.parent;
-                    let id = this.type ===2 ? this.node.data.id : this.node.parent.data.id ;
+                    let did = JSON.parse(sessionStorage.getItem('user')).did;//获取部门id
+                    if (this.node.parent.data===undefined) {
+                        var id = this.type ===2 ? this.node.data.id : did ;
+                    }else {
+                        var id = this.type ===2 ? this.node.data.id : this.node.parent.data.id ;
+                    }
                     let data = {'pid':this.node.data.id,'name':this.departmentName};//post参数
                     this.$api.post(url, data).then(res => {
                         if (res.data.status === 1) {
