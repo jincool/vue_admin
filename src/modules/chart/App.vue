@@ -55,7 +55,6 @@
     .data_tit1{
         width: 46%;
         height: 10%;
-        background-image: url("../../assets/images/tit01s.png");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         margin:0 auto;

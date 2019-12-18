@@ -4,10 +4,10 @@
             <el-col :xs="2" :sm="2" :md="1">
                 <div class="title" @click="collapse"><i :class="iconFold"></i></div>
             </el-col>
-            <el-col :xs="10" :sm="12" :md="18" >
-                <div class="title" ><i class="el-icon-eleme"></i></div>
+            <el-col :xs="16" :sm="12" :md="18" >
+                <div class="title" ><i class="el-icon-eleme">管理平台</i></div>
             </el-col>
-            <el-col :xs=12 :sm="10" :md="4">
+            <el-col :xs=6 :sm="10" :md="4">
                 <span><i class="el-icon-s-custom"></i>{{user}}</span>
                 <el-dropdown>
                     <i class="el-icon-switch-button" style="color:#fff; margin-left: 15px"></i>
