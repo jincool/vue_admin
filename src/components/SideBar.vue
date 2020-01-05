@@ -48,9 +48,12 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     .el-menu-vertical:not(.el-menu--collapse) {
         width: 200px;
         min-height: 400px;
+    }
+    .el-menu{
+        border-right: solid 1px $--color-primary;
     }
 </style>

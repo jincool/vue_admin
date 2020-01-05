@@ -8,7 +8,7 @@ export default (routers,data) => {
 function generaMenu(routers,data){
   data.forEach((item)=>{
     let menu = Object.assign({},item)
-    menu.component = lazy(menu.component)
+    menu.component = lazy(menu.url)
     if(item.children){
       menu.children = []
       generaMenu(menu.children,item.children)

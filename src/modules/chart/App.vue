@@ -1,24 +1,6 @@
 <template>
   <div id="app">
-      <template>
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="用户管理" name="first">dd</el-tab-pane>
-          <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-          <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-          <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
-        </el-tabs>
-      </template>
-      <el-button type="primary" icon="el-icon-edit"></el-button>
-
-      <router-link to="/"></router-link>
-
-      <div class="dataAllBorder01">
-          <div class="dataAllBorder02">
-              <div class="data_tit1">xxxxx分析</div>
-          dddd
-          </div>
-      </div>
-
+      我是其他模块页面
     <router-view/>
   </div>
 </template>

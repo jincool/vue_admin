@@ -1,7 +1,7 @@
 <template>
-    <div class="pay">
+    <div>
             <el-container>
-                <SideBar></SideBar>
+                <SideBar class="hidden-xs-only"></SideBar>
 
                 <el-container>
 
@@ -33,15 +33,15 @@
     }
 </script>
 
-<style>
-.el-container{
-    min-width: 800px;
-}
-.el-header {
-    background-color: #545c64;
-    /*background: linear-gradient(to right,#545c64, #5b535e, #5b535e);*/
-    color: #ffffff;
-    line-height: 50px;
-    height: 56px;
-}
+<style lang="scss">
+    .el-main{
+        max-height:88vh;
+        overflow: auto;
+    }
+    .el-header {
+        background-color: $--color-primary;
+        color: #ffffff;
+        line-height: 50px;
+        height: 56px;
+    }
 </style>

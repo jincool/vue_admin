@@ -1,11 +1,10 @@
 // 懒加载组件
-function lazy(name) {
-  let file = name.split('-')[0]
-  if (name !== 'Index') {
-    return () => import(`@/views/${file}/${name}.vue`)
-  } else {
-    return () => import(`@/components/${name}.vue`)
-  }
+function lazy(url) {
+    if (url === 'Index'||url === 'External') {
+        return () => import(`@/components/${url}.vue`)
+    } else {
+        return () => import(`@/views/${url}.vue`)
+    }
 }
 export {lazy}
 

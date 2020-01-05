@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from './components/login.vue'
+import Login from './components/Login.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -8,22 +8,17 @@ const router = new Router({
         {
             path: '/login',
             name: 'login',
-            component: login
+            component: Login
         },
     ]
 });
 router.beforeEach((to, from, next) => {
-    console.log(to)
-
-    // document.body.style.background="linear-gradient(to right, #e9eaef, #e9eaef)";
-    // 判断是否为外部链接，如果是则重定向outside_iframe组件
+    // 判断是否为外部链接，如果是则重定向External组件
     if (to.path.indexOf('http') !== -1) {
-
+        sessionStorage.setItem('url',to.fullPath)
         router.push({
-            path: '/outside-iframe',
-            query: {redirect: to.fullPath}
+            path: '/External',
         });
-        console.log(next())
         next();
     }
     // 判断是否登录
@@ -34,11 +29,8 @@ router.beforeEach((to, from, next) => {
         })
     } else {
         next({
-            // path: '/pay',
         })
     }
-
-
     next();
 })
 export default router

@@ -1,21 +1,23 @@
 <template>
     <div>
-        <!--条件筛选区域-->
-        <el-row :gutter="10">
-            <el-col :xs="24" :sm="24" :md="18" :lg="16" :xl="12">
-                <div>
-                    <!--<Department>-->
-                    <!--</Department>-->
-                </div>
-            </el-col>
-        </el-row>
-        <br>
+        <el-drawer
+                title="我是部门抽屉板"
+                :modal-append-to-body="false"
+                size="50%"
+                direction="ltr"
+                :visible.sync="drawer"
+                :with-header="false">
+            <dept-tree @getDeptTree="handleDeptTree"></dept-tree>
+        </el-drawer>
+        <div class="dept-tree-show hidden-sm-and-up" @click="drawer = true">
+            <i class="el-icon-caret-right"></i>
+        </div>
         <!--数据展示区-->
         <el-row :gutter="10">
-            <el-col :xs="6" :sm="6" :md="6" :lg="4" :xl="4">
+            <el-col :xs="24" :sm="6" :md="6" :lg="4" :xl="4" class="hidden-xs-only">
                 <dept-tree @getDeptTree="handleDeptTree"></dept-tree>
             </el-col>
-            <el-col :xs="18" :sm="18" :md="18" :lg="20" :xl="20">
+            <el-col :xs="24" :sm="18" :md="18" :lg="20" :xl="20">
                 <el-card shadow="hover">
                     <div slot="header">
                         <span>{{deptName}}</span>
@@ -96,7 +98,7 @@
         <el-dialog
                 :title="title"
                 :visible.sync="dialogVisible"
-                 width="30%"
+                 width="330px"
                 :before-close="handleClose">
 
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="ruleForm">
@@ -144,6 +146,7 @@
         data() {
             return {
                 title:'',//模态框标题
+                drawer:false,//部门抽屉关闭
                 role: [],//角色列表
                 value: '',//select角色选择值
                 isOpenDialogVisible:false,//是否已经打开角色菜单模态框
@@ -378,5 +381,18 @@
     };
 </script>
 <style scoped>
-
+.dept-tree-show{
+   height: 500px;
+    width: 8px;
+    background-color: #545c64;
+    position: fixed;
+    z-index: 2;
+    left: 2px;
+    border-radius: 3px;
+}
+.dept-tree-show i{
+    font-size: 20px;
+    color: #545c64;
+    margin-top: 250px;
+}
 </style>

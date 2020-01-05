@@ -140,7 +140,7 @@
 </template>
 <script>
     export default {
-        name: "system_menu",
+        name: "set-menu",
         data() {
             return {
                 menu: [],//菜单列表
@@ -178,7 +178,7 @@
             },
             //编辑主菜单 type:1=>一级主菜单，2=>二级子菜单
             editMenu(type, id,inputValue){
-                this.mesEditBox('请修改菜单名', '?c=Menu&a=editMenu', {'id':id,'type':type},inputValue).then(status=>{
+                this.mesEditBox('请修改菜单名', '?f=system&c=Menu&a=editMenu', {'id':id,'type':type},inputValue).then(status=>{
                     if (status===1) {
                         this.getMenu()
                     }

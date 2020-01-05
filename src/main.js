@@ -1,27 +1,19 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui';
-// import 'element-ui/lib/theme-chalk/index.css';
-import '@/assets/css/theme/index.css';
+import '@/assets/css/element-variables.scss'
+import 'element-ui/lib/theme-chalk/display.css';
 import '@/assets/css/common.css';
 import App from './App.vue'
 import router from './router'
 import VueDND from 'awe-dnd'
-// import store from './store'
 import store from './store/store'
-import echarts from 'echarts'
 import api from './api/api'
-import FormFrame from '@/components/common/FormFrame'
 Vue.config.productionTip = false;
 Vue.prototype.$api = api;//axios绑定原型
 Vue.use(ElementUI);
 Vue.use(VueDND)//拖拽排序
 // 用户手动刷新页面，这是路由会被重设，要重新新增
-if (sessionStorage.getItem('user')) {
-    let routes = JSON.parse(sessionStorage.getItem('routes'));
-    store.dispatch("add_Routes", routes)
-}
-Vue.component('form_frame', FormFrame);
-Vue.prototype.$echarts = echarts;
+import '@/utils/load-menu.js'
 console.log(process.env.NODE_ENV)
 new Vue({
     router,

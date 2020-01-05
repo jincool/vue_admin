@@ -109,7 +109,7 @@
         </el-row>
         <el-dialog
                 :visible.sync="dialogVisible"
-                width="30%"
+                width="350px"
                 :before-close="handleClose">
             <span slot="title">
                 <el-tag>{{selectedLabel}}</el-tag>
@@ -153,7 +153,7 @@
 </template>
 <script>
     export default {
-        name: "system_menu",
+        name: "set-role",
         data() {
             return {
                 role: [],//角色列表
@@ -301,6 +301,7 @@
                 let params = { 'dataRole': this.role};
                 this.$api.post('?f=system&c=Role&a=refreshSort', params).then(res => {
                     if (res.data.status === 1) {
+                        this.getMenu(this.value)//重新获取子菜单
                         this.$message({
                             type: 'info',
                             message: '操作成功'

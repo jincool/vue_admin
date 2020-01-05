@@ -1,5 +1,5 @@
 <template>
-    <div class="height_auto">
+    <div id="deptManage">
         <el-button
                 style="margin-left: 20px"
                 size="small"
@@ -14,16 +14,15 @@
                 :expand-on-click-node="false"
         >
 
-            <div class="custom-tree-node" slot-scope="{ node, data }" @click="() => getNode(node)">
-                <el-col :span="14">
-
+            <el-row  type="flex"  justify="space-between" class="custom-tree-node weight-auto" slot-scope="{ node, data }" @click="() => getNode(node)">
+                <!--<el-row type="flex" class="row-bg" justify="space-between">-->
+                <el-col :xs="12">
                      <span class="custom-tree-icon">
                         <i class="el-icon-s-home"></i>
                      </span>
                     <span>{{ node.label }}</span>
-
                 </el-col>
-                <el-col :span="10">
+                <el-col :xs="12">
                     <el-button
                             size="mini"
                             icon="el-icon-edit"
@@ -40,15 +39,15 @@
                             @click="deleteDepartment(node.data.id,node.data.pid)">删除
                     </el-button>
                 </el-col>
-
-            </div>
+                <!--</el-row>-->
+            </el-row>
         </el-tree>
 
 
         <!--模态框-->
         <el-dialog
                 :visible.sync="dialogVisible"
-                width="30%"
+                 width="280px"
                 :before-close="handleClose">
             <span slot="title">
                 添加
@@ -68,7 +67,7 @@
 </template>
 
 <script>
-import { deleteBox} from "../../utils/utils";
+import { deleteBox} from "@/utils/utils";
 export default {
         name: "Tree",
         data() {
@@ -237,22 +236,26 @@ export default {
     }
 </script>
 
-<style>
-    .custom-tree-node {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        /*font-size: 14px;*/
-        /*padding-right: 8px;*/
-    }
+<style lang="scss">
+    #deptManage{
+        .custom-tree-node {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .custom-tree-icon {
-        color: #aa85f5;
-    }
+        .custom-tree-icon {
+            color: #aa85f5;
+        }
 
-    /*部门间距*/
-    .el-tree-node__content {
-        height: 40px;
+        /*部门间距*/
+        .el-tree-node__content {
+            height: 40px;
+        }
+        .weight-auto{
+            overflow: auto;
+        }
+        .weight-auto::-webkit-scrollbar {display:none}
     }
 </style>

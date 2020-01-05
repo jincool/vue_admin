@@ -1,13 +1,13 @@
 <template>
     <div>
-        <el-row :gutter="20">
-            <el-col :xs="16" :sm="16" :md="14" >
+        <el-row type="flex" class="row-bg" justify="center">
+            <el-col :xs="24" :sm="16" :md="14" >
                 <el-card shadow="hover">
                     <div slot="header" >
                         <span>部门设置</span>
                     </div>
                     <div>
-                        <dept-Manage></dept-Manage>
+                        <dept-manage></dept-manage>
                     </div>
                 </el-card>
             </el-col>
@@ -16,10 +16,10 @@
 </template>
 
 <script>
-    import deptManage from '@/components/common/DeptManage';
+    import DeptManage from './components/DeptManage';
     export default {
         name: "department_add",
-        components:{deptManage},
+        components:{DeptManage},
         data() {
             return {
 
