@@ -15,7 +15,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     // 判断是否为外部链接，如果是则重定向External组件
     if (to.path.indexOf('http') !== -1) {
-        sessionStorage.setItem('url',to.fullPath)
+        sessionStorage.setItem('externalUrl',to.fullPath)
         router.push({
             path: '/External',
         });

@@ -246,7 +246,7 @@ export default {
         }
 
         .custom-tree-icon {
-            color: #aa85f5;
+            color: $--color-primary;
         }
 
         /*部门间距*/

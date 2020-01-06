@@ -3,7 +3,7 @@
         <el-drawer
                 title="我是部门抽屉板"
                 :modal-append-to-body="false"
-                size="50%"
+                size="55%"
                 direction="ltr"
                 :visible.sync="drawer"
                 :with-header="false">
@@ -252,7 +252,9 @@
                     this.getRole()
                     this.isOpenDialogVisible = true;
                 }
-                this.resetForm('ruleForm');//重置表单
+                this.$nextTick(() => {
+                    this.resetForm('ruleForm')
+                })
             },
             // 关闭模态框提示
             handleClose() {
@@ -268,6 +270,7 @@
              */
             resetForm(formName) {
                 this.$refs[formName].resetFields();
+
             },
             // 获取用户列表
             getUserList() {
@@ -380,11 +383,11 @@
 
     };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .dept-tree-show{
    height: 500px;
-    width: 8px;
-    background-color: #545c64;
+    width: 6px;
+    background-color: $--color-primary;
     position: fixed;
     z-index: 2;
     left: 2px;
@@ -392,7 +395,7 @@
 }
 .dept-tree-show i{
     font-size: 20px;
-    color: #545c64;
+    color: $--color-primary;
     margin-top: 250px;
 }
 </style>

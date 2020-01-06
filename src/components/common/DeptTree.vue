@@ -5,14 +5,15 @@ event
 回调参数：当前所选部门信息
 -->
 <template>
-    <div class="height_auto">
+    <div  id="deptTree">
         <el-tree
+                class="dept-tree-height_auto"
                 accordion
                 :props="props"
                 :load="loadNode"
                 lazy
                 :expand-on-click-node="false"
-                 node-key="id"
+                node-key="id"
                 :default-expanded-keys="expandedKeys"
         >
             <div class="custom-tree-node" slot-scope="{ node, data }" @click="() => getNode(node)">
@@ -50,7 +51,7 @@ event
                 if (node.level === 0) {
                     this.expandedKeys.push(did);
                     let deptInfoArr =deptInfo.length===0?[{'id':did,'name':''}]:[deptInfo[deptInfo.length-1]];
-                        return resolve(deptInfoArr);
+                    return resolve(deptInfoArr);
                 }
                 if (node.level > 1)
                     setTimeout(() => {
@@ -83,22 +84,29 @@ event
     }
 </script>
 
-<style >
-    .custom-tree-node {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        /*font-size: 14px;*/
-        /*padding-right: 8px;*/
+<style lang="scss">
+
+    #deptTree{
+        .dept-tree-height_auto{
+            overflow: auto;
+            max-height:82vh;
+        }
+        .custom-tree-node {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /*font-size: 14px;*/
+            /*padding-right: 8px;*/
+        }
+        .custom-tree-icon {
+            color: $--color-primary;
+        }
+
+        /*部门间距*/
+        .el-tree-node__content {
+            height: 35px;
+        }
     }
 
-    .custom-tree-icon {
-        color: #aa85f5;
-    }
-
-    /*部门间距*/
-    .el-tree-node__content {
-        height: 35px;
-    }
 </style>

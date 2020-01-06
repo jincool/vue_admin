@@ -113,7 +113,7 @@
         </el-row>
         <el-dialog
                 :visible.sync="dialogVisible"
-                width="30%"
+                width="350px"
                 :before-close="handleClose">
             <span slot="title">
                 <el-tag>{{selectedLabel}}</el-tag><el-tag type="danger">添加子菜单</el-tag>

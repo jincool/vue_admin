@@ -13,7 +13,7 @@
             }
         },
         created(){
-            let path = sessionStorage.getItem('url');
+            let path = sessionStorage.getItem('externalUrl');
             if (path.substr(0,1)==='/')
                 this.url = path.substr(1)
             // window.open(path.substr(1)) //弹出页面
