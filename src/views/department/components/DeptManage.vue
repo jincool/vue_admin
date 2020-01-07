@@ -14,7 +14,7 @@
                 :expand-on-click-node="false"
         >
 
-            <el-row  type="flex"  justify="space-between" class="custom-tree-node weight-auto" slot-scope="{ node, data }" @click="() => getNode(node)">
+            <div  class="custom-tree-node weight-auto" slot-scope="{ node, data }" @click="() => getNode(node)">
                 <!--<el-row type="flex" class="row-bg" justify="space-between">-->
                 <el-col :xs="12">
                      <span class="custom-tree-icon">
@@ -40,7 +40,7 @@
                     </el-button>
                 </el-col>
                 <!--</el-row>-->
-            </el-row>
+            </div>
         </el-tree>
 
 
